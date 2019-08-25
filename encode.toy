@@ -1,0 +1,52 @@
+/**********************************************************************
+ *  Name:    Shashank Rao
+ *  NetID:   svr38
+ *  Precept: P00
+ *
+ *  Description:  This TOY program reads 4 16 bit integers and finds an
+ *                even parity between them.
+ *
+ *  % java-introcs TOY multiply.toy
+ *  % more encode3.txt
+ *   0001 0001 0000 0001
+ *   0001 0001 0001 0000
+ *   0001 0001 0001 0001
+ *   FFFF
+ *
+ *
+ *
+ **************************************************************************/
+
+-----------------------------------------------------------------------------
+loc value  pseudocode (for the humans)   Java equivalent (optional)
+-----------------------------------------------------------------------------
+
+10: 8AFF   read R[A]                     m1 = StdIn.readInt();
+11: CA16   if (R[A] == 0) goto 16
+12: 7401   R[4] = 1
+13: 25A4   R[5] <- R[A] - R[4]
+14: C516   if (R[5] == 0) goto 16
+15: 0000   HALT                          while(R[A] == 0 || R[A] == 1){
+16: 8BFF   read R[B]                     m2 = StdIn.readInt();
+17: 8CFF   read R[C]                     m3 = StdIn.readInt();
+18: 8DFF   read R[D]                     m4 = StdIn.readInt();
+19: 9AFF   write R[A]                    System.out.println(A);
+1A: 9BFF   write R[B]                    System.out.println(B);
+1B: 9CFF   write R[C]                    System.out.println(C);
+1C: 9DFF   write R[D]                    System.out.println(D);
+1D: 41AB   compares m1 and m2 stores at R[1]
+1E: 471D   compares R[1] and D stores at R[7]
+1F: 97FF   write R[A]                    System.out.println(A);
+20: 42AC   compares m1 and m3 stores at R[2]
+21: 482D   compares R[1] and D stores at R[8]
+22: 98FF   write R[B]                    System.out.println(B);
+23: 43BC   compares m2 and m3 stores at R[3]
+24: 493D   compares R[1] and D stores at R[9]
+25: 99FF   write R[C]                    System.out.println(C);
+26: C010   goto 10                  }
+
+
+
+27: 0000   HALT
+
+-----------------------------------------------------------------------------

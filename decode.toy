@@ -1,0 +1,84 @@
+/**********************************************************************
+ *  Name:    Shashank Rao
+ *  NetID:   svr38
+ *  Precept: P00
+ *
+ *  Description:  This TOY program reads 4 16 bit integers and finds an
+ *                even parity between them.
+ *
+ *  % java-introcs TOY multiply.toy
+ *  % more encode3.txt
+ *   0001 0001 0000 0001
+ *   0001 0001 0001 0000
+ *   0001 0001 0001 0001
+ *   FFFF
+ *
+ *
+ *
+ **************************************************************************/
+
+-----------------------------------------------------------------------------
+loc value  pseudocode (for the humans)   Java equivalent (optional)
+-----------------------------------------------------------------------------
+10: 8AFF   read R[A]                     m1 = StdIn.readInt();
+11: CA16   if (R[A] == 0) goto 16
+12: 7401   R[4] = 1
+13: 25A4   R[5] <- R[A] - R[4]
+14: C516   if (R[5] == 0) goto 16
+15: 0000   HALT                          while(R[A] == 0 || R[A] == 1){
+16: 8BFF   read R[B]                     m2 = StdIn.readInt();
+17: 8CFF   read R[C]                     m3 = StdIn.readInt();
+18: 8DFF   read R[D]                     m4 = StdIn.readInt();
+19: 87FF   read R[7]
+1A: 88FF   read R[8]
+1B: 89FF   read R[9]
+
+1C: 46AB   compares m1 and m2 stores at R[6]
+1D: 466D   compares R[6] and m4 stores at R[6]
+1E: 4176   compares R[6] and p1 stores at R[1]
+
+1F: 4EAC   compares m1 and m3 stores at R[E]
+20: 4EED   compares R[E] and m4 stores at R[E]
+21: 428E   compares p2 and R[E] stores at R[2]
+
+22: 4FBC   compares m2 and m3 stores at R[F]
+23: 4FFD   compares m4 and R[F] stores at R[F]
+24: 439F   compares p2 and R[F] stores at R[3]
+
+25: 7603   stores value 3 at R[6]
+26: 1E12   adds R[1] and R[2] and stores at R[E]
+27: 1FE3   adds R[E] and R[3] and stores at R[F]
+28: 2E6F   subtracts R[F] from R[6] and stores at R[E]
+29: CE35   if(R[E] == 0) goto 35
+
+2A: 7F02   stores value 2 at R[F]
+2B: 1E12   adds R[1] and R[2] and stores at R[E]
+2C: 2EFE   subtracts R[E] from R[F] and stores at R[E]
+2D: CE37   if(R[E] == 0) goto 37
+
+2E: 1E13   adds R[1] and R[3] stores at R[E]
+2F: 2EFE   subtracts R[E] from R[F] and stores at R[E]
+30: CE39   if(R[E] == 0) goto 39
+
+31: 1E23   adds R[2] and R[3] stores at R[E]
+32: 2EFE   subtracts R[E] from R[F] and stores at R[E]
+33: CE3B   if(R[E] == 0) goto 3B
+34: C03C
+
+35: 4DD4   m4 <- m4 ^ 1
+36: C03C
+37: 4AA4   m1 <- m1 ^ 1
+38: C03C
+39: 4BB4   m2 <- m2 ^ 1
+3A: C03C
+3B: 4CC4   m3 <- m3 ^ 1
+3C: 9AFF   write R[A]                    System.out.println(A);
+3D: 9BFF   write R[B]                    System.out.println(B);
+3E: 9CFF   write R[C]                    System.out.println(C);
+3F: 9DFF   write R[D]                    System.out.println(D);
+40: C010   goto 10                  }
+
+
+
+41: 0000   HALT
+-----------------------------------------------------------------------------
